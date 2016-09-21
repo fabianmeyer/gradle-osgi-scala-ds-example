@@ -1,0 +1,36 @@
+plugins {
+    id "com.athaydes.osgi-run" version "1.5.0"
+}
+
+runOsgi {
+  bundles += subprojects
+}
+
+dependencies {
+  osgiRuntime group: "org.slf4j", name: "slf4j-simple", version: "1.7.10"
+  osgiRuntime group: "org.apache.felix", name: "org.apache.felix.scr", version: "2.0.6"
+  osgiRuntime group: "org.apache.felix", name: "org.apache.felix.configadmin", version: '1.8.10'
+}
+
+repositories {
+   mavenCentral()
+}
+
+subprojects {
+
+    apply plugin: "scala"
+    apply plugin: "osgi"
+
+    version = "1.0"
+
+    repositories {
+       mavenCentral()
+    }
+
+    dependencies {
+        compile group: "org.eclipse.rdf4j", name: "rdf4j-model", version: "2.0.1"
+        compile group: 'org.osgi', name: 'org.osgi.core', version: '6.0.0'
+        compile group: 'org.osgi', name: 'osgi.cmpn', version: '6.0.0'
+        compile group: "org.scala-lang", name: "scala-library", version: "2.11.8"
+    }
+}

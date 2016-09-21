@@ -1,0 +1,14 @@
+plugins {
+    id "neva.scr" version "1.0.0"
+}
+
+dependencies {
+    compile project(":api")
+    compile group: "org.eclipse.rdf4j", name: "rdf4j-rio-turtle", version: "2.0.1"
+}
+
+jar {
+    manifest {
+        instruction "Private-Package", "provider"
+    }
+}
