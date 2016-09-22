@@ -1,27 +1,25 @@
 package consumer
 
 import api.Service
-import org.osgi.service.component.annotations.Component
-import org.osgi.service.component.annotations.Reference
-import org.osgi.service.component.annotations.Activate
-import org.eclipse.rdf4j.model.Model
+import org.osgi.service.component.annotations.{Activate, Component, Reference}
 
-@Component(name="Consumer", immediate=true)
+import scala.collection.JavaConverters._
+
+@Component(name = "Consumer", immediate = true)
 class Consumer {
 
-  var service : Service = null
+  var service: Service = null
 
   @Reference
-  def setService(service : Service) : Unit = {
+  def setService(service: Service): Unit = {
     this.service = service
   }
 
-  def unsetService(service : Service) : Unit = {
-    this.service = service
-  }
+  def unsetService(service: Service): Unit = {}
 
   @Activate
-  def activate() : Unit = {
-    println(service.getModel)
+  def activate(): Unit = {
+    val model = service.getModel
+    model.asScala.foreach(println)
   }
 }
